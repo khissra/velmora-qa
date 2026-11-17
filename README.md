@@ -215,10 +215,4 @@ FAILURES.md
 requirements.txt
 ```
 
-`velmora/dense.py` is not used by the pipeline (the sentence-level retriever is in `retrieval.py`); it can be deleted.
 
-## Next steps
-
-Described in the design note: new held-out questions, a manual check of the judge, a safer refusal rule
-(do not let expansion lower the coverage), and what to do about invented answers, old or conflicting articles, and
-questions with no answer.
