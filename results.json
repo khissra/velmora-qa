@@ -1,0 +1,1175 @@
+[
+  {
+    "id": "Q01",
+    "question": "How long does standard delivery take?",
+    "answerable": true,
+    "answered": true,
+    "retrieved": [
+      "KB-06",
+      "KB-24",
+      "KB-07",
+      "KB-14",
+      "KB-11"
+    ],
+    "gold": [
+      "KB-06"
+    ],
+    "answer": "Standard delivery takes 3 to 5 working days and costs 4.90 EUR; it is free from 60 EUR of purchases. Pickup point delivery takes 2 to 4 working days and costs 3.50 EUR.",
+    "cited": [
+      "KB-06",
+      "KB-07"
+    ],
+    "note": "Note: KB-07 (updated 2022-09-14) gives different information. The most recent article, KB-06, is used.",
+    "recall": {
+      "1": 1.0,
+      "3": 1.0,
+      "5": 1.0
+    },
+    "rr": 1.0,
+    "all_gold": true,
+    "cited_gold": true,
+    "keyword_score": 1.0,
+    "status": "good_answer"
+  },
+  {
+    "id": "Q02",
+    "question": "Which payment methods can I use?",
+    "answerable": true,
+    "answered": true,
+    "retrieved": [
+      "KB-02",
+      "KB-15",
+      "KB-03",
+      "KB-18",
+      "KB-29"
+    ],
+    "gold": [
+      "KB-02"
+    ],
+    "answer": "We refund to your original payment method within 5 business days after we receive and check the returned item.",
+    "cited": [
+      "KB-15"
+    ],
+    "note": "",
+    "recall": {
+      "1": 1.0,
+      "3": 1.0,
+      "5": 1.0
+    },
+    "rr": 1.0,
+    "all_gold": true,
+    "cited_gold": false,
+    "keyword_score": 0.0,
+    "status": "incomplete_answer"
+  },
+  {
+    "id": "Q03",
+    "question": "How much does Express delivery cost?",
+    "answerable": true,
+    "answered": true,
+    "retrieved": [
+      "KB-07",
+      "KB-06",
+      "KB-24",
+      "KB-14",
+      "KB-01"
+    ],
+    "gold": [
+      "KB-06"
+    ],
+    "answer": "Express delivery arrives the next working day for orders placed before 14:00 and costs 7.90 EUR whatever the basket size. Pickup point delivery takes 2 to 4 working days and costs 3.50 EUR.",
+    "cited": [
+      "KB-06",
+      "KB-07"
+    ],
+    "note": "Note: KB-07 (updated 2022-09-14) gives different information. The most recent article, KB-06, is used.",
+    "recall": {
+      "1": 0.0,
+      "3": 1.0,
+      "5": 1.0
+    },
+    "rr": 0.5,
+    "all_gold": true,
+    "cited_gold": true,
+    "keyword_score": 1.0,
+    "status": "good_answer"
+  },
+  {
+    "id": "Q04",
+    "question": "How many days do I have to return an item?",
+    "answerable": true,
+    "answered": true,
+    "retrieved": [
+      "KB-14",
+      "KB-01",
+      "KB-16",
+      "KB-12",
+      "KB-18"
+    ],
+    "gold": [
+      "KB-12",
+      "KB-13"
+    ],
+    "answer": "Open My orders, choose the order, click Return, then select the items and the reason.",
+    "cited": [
+      "KB-14"
+    ],
+    "note": "",
+    "recall": {
+      "1": 0.0,
+      "3": 0.0,
+      "5": 0.5
+    },
+    "rr": 0.25,
+    "all_gold": false,
+    "cited_gold": false,
+    "keyword_score": 0.0,
+    "status": "incomplete_answer"
+  },
+  {
+    "id": "Q05",
+    "question": "My package has been stuck on the same status for a week. What should I do?",
+    "answerable": true,
+    "answered": false,
+    "retrieved": [
+      "KB-19",
+      "KB-18",
+      "KB-08",
+      "KB-03",
+      "KB-01"
+    ],
+    "gold": [
+      "KB-09"
+    ],
+    "answer": "I'm sorry, but I couldn't find enough information in the Velmora Help Center to answer this question.",
+    "cited": [],
+    "note": "",
+    "recall": {
+      "1": 0.0,
+      "3": 0.0,
+      "5": 0.0
+    },
+    "rr": 0.0,
+    "all_gold": false,
+    "cited_gold": false,
+    "keyword_score": 0.0,
+    "status": "false_refusal"
+  },
+  {
+    "id": "Q06",
+    "question": "Do you have a physical shop in Lyon?",
+    "answerable": false,
+    "answered": false,
+    "retrieved": [
+      "KB-17",
+      "KB-09",
+      "KB-26",
+      "KB-08",
+      "KB-20"
+    ],
+    "gold": [],
+    "answer": "I'm sorry, but I couldn't find enough information in the Velmora Help Center to answer this question.",
+    "cited": [],
+    "note": "",
+    "keyword_score": 1.0,
+    "status": "correct_refusal"
+  },
+  {
+    "id": "Q07",
+    "question": "How long is a gift card valid?",
+    "answerable": true,
+    "answered": true,
+    "retrieved": [
+      "KB-05",
+      "KB-15",
+      "KB-02",
+      "KB-26",
+      "KB-14"
+    ],
+    "gold": [
+      "KB-05"
+    ],
+    "answer": "Gift cards come in three amounts: 25, 50 and 100 EUR. A gift card cannot be exchanged for cash and cannot be used to buy another gift card.",
+    "cited": [
+      "KB-05"
+    ],
+    "note": "",
+    "recall": {
+      "1": 1.0,
+      "3": 1.0,
+      "5": 1.0
+    },
+    "rr": 1.0,
+    "all_gold": true,
+    "cited_gold": true,
+    "keyword_score": 0.0,
+    "status": "incomplete_answer"
+  },
+  {
+    "id": "Q08",
+    "question": "How long do refunds take?",
+    "answerable": true,
+    "answered": true,
+    "retrieved": [
+      "KB-14",
+      "KB-11",
+      "KB-09",
+      "KB-16",
+      "KB-01"
+    ],
+    "gold": [
+      "KB-15",
+      "KB-13"
+    ],
+    "answer": "Delivery takes 3 to 7 working days and starts at 9.90 EUR.",
+    "cited": [
+      "KB-11"
+    ],
+    "note": "",
+    "recall": {
+      "1": 0.0,
+      "3": 0.0,
+      "5": 0.0
+    },
+    "rr": 0.0,
+    "all_gold": false,
+    "cited_gold": false,
+    "keyword_score": 0.0,
+    "status": "incomplete_answer"
+  },
+  {
+    "id": "Q09",
+    "question": "Can I use two promo codes on the same order?",
+    "answerable": true,
+    "answered": true,
+    "retrieved": [
+      "KB-04",
+      "KB-01",
+      "KB-30",
+      "KB-18",
+      "KB-13"
+    ],
+    "gold": [
+      "KB-04"
+    ],
+    "answer": "Only one promo code per order is allowed, and two codes cannot be combined. Promo codes do not reduce shipping costs.",
+    "cited": [
+      "KB-04"
+    ],
+    "note": "",
+    "recall": {
+      "1": 1.0,
+      "3": 1.0,
+      "5": 1.0
+    },
+    "rr": 1.0,
+    "all_gold": true,
+    "cited_gold": true,
+    "keyword_score": 1.0,
+    "status": "good_answer"
+  },
+  {
+    "id": "Q10",
+    "question": "How fast is Express delivery and what is the order cut-off time?",
+    "answerable": true,
+    "answered": false,
+    "retrieved": [
+      "KB-07",
+      "KB-06",
+      "KB-28",
+      "KB-24",
+      "KB-19"
+    ],
+    "gold": [
+      "KB-06"
+    ],
+    "answer": "I'm sorry, but I couldn't find enough information in the Velmora Help Center to answer this question.",
+    "cited": [],
+    "note": "",
+    "recall": {
+      "1": 0.0,
+      "3": 1.0,
+      "5": 1.0
+    },
+    "rr": 0.5,
+    "all_gold": true,
+    "cited_gold": false,
+    "keyword_score": 0.0,
+    "status": "false_refusal"
+  },
+  {
+    "id": "Q11",
+    "question": "My card payment was declined. How many times can I retry?",
+    "answerable": true,
+    "answered": true,
+    "retrieved": [
+      "KB-03",
+      "KB-02",
+      "KB-01",
+      "KB-14",
+      "KB-08"
+    ],
+    "gold": [
+      "KB-03"
+    ],
+    "answer": "A declined payment is usually caused by the card limit or a missing 3-D Secure confirmation from your bank. You can retry up to 3 times.",
+    "cited": [
+      "KB-03"
+    ],
+    "note": "",
+    "recall": {
+      "1": 1.0,
+      "3": 1.0,
+      "5": 1.0
+    },
+    "rr": 1.0,
+    "all_gold": true,
+    "cited_gold": true,
+    "keyword_score": 1.0,
+    "status": "good_answer"
+  },
+  {
+    "id": "Q12",
+    "question": "How can I become a Velmora reseller?",
+    "answerable": false,
+    "answered": false,
+    "retrieved": [
+      "KB-02",
+      "KB-01",
+      "KB-14",
+      "KB-26",
+      "KB-07"
+    ],
+    "gold": [],
+    "answer": "I'm sorry, but I couldn't find enough information in the Velmora Help Center to answer this question.",
+    "cited": [],
+    "note": "",
+    "keyword_score": 1.0,
+    "status": "correct_refusal"
+  },
+  {
+    "id": "Q13",
+    "question": "Where can I find my tracking link?",
+    "answerable": true,
+    "answered": true,
+    "retrieved": [
+      "KB-08",
+      "KB-09",
+      "KB-18",
+      "KB-03",
+      "KB-19"
+    ],
+    "gold": [
+      "KB-08"
+    ],
+    "answer": "You find your tracking link in the shipping confirmation email, and also in My orders.",
+    "cited": [
+      "KB-08"
+    ],
+    "note": "",
+    "recall": {
+      "1": 1.0,
+      "3": 1.0,
+      "5": 1.0
+    },
+    "rr": 1.0,
+    "all_gold": true,
+    "cited_gold": true,
+    "keyword_score": 1.0,
+    "status": "good_answer"
+  },
+  {
+    "id": "Q14",
+    "question": "How long is an order held at a pickup point?",
+    "answerable": true,
+    "answered": true,
+    "retrieved": [
+      "KB-10",
+      "KB-14",
+      "KB-01",
+      "KB-28",
+      "KB-06"
+    ],
+    "gold": [
+      "KB-10"
+    ],
+    "answer": "Choose your pickup point at checkout. Your parcel is held there for 10 days.",
+    "cited": [
+      "KB-10"
+    ],
+    "note": "",
+    "recall": {
+      "1": 1.0,
+      "3": 1.0,
+      "5": 1.0
+    },
+    "rr": 1.0,
+    "all_gold": true,
+    "cited_gold": true,
+    "keyword_score": 1.0,
+    "status": "good_answer"
+  },
+  {
+    "id": "Q15",
+    "question": "Can I send back something I bought by mistake?",
+    "answerable": true,
+    "answered": false,
+    "retrieved": [
+      "KB-16",
+      "KB-29",
+      "KB-08",
+      "KB-27",
+      "KB-10"
+    ],
+    "gold": [
+      "KB-12"
+    ],
+    "answer": "I'm sorry, but I couldn't find enough information in the Velmora Help Center to answer this question.",
+    "cited": [],
+    "note": "",
+    "recall": {
+      "1": 0.0,
+      "3": 0.0,
+      "5": 0.0
+    },
+    "rr": 0.0,
+    "all_gold": false,
+    "cited_gold": false,
+    "keyword_score": 0.0,
+    "status": "false_refusal"
+  },
+  {
+    "id": "Q16",
+    "question": "Which countries do you deliver to outside France?",
+    "answerable": true,
+    "answered": true,
+    "retrieved": [
+      "KB-11",
+      "KB-12",
+      "KB-29",
+      "KB-09",
+      "KB-07"
+    ],
+    "gold": [
+      "KB-11"
+    ],
+    "answer": "We do not ship to countries outside the European Union.",
+    "cited": [
+      "KB-11"
+    ],
+    "note": "",
+    "recall": {
+      "1": 1.0,
+      "3": 1.0,
+      "5": 1.0
+    },
+    "rr": 1.0,
+    "all_gold": true,
+    "cited_gold": true,
+    "keyword_score": 0.0,
+    "status": "incomplete_answer"
+  },
+  {
+    "id": "Q17",
+    "question": "Can you deliver to Switzerland?",
+    "answerable": true,
+    "answered": false,
+    "retrieved": [
+      "KB-11",
+      "KB-07",
+      "KB-01",
+      "KB-02",
+      "KB-08"
+    ],
+    "gold": [
+      "KB-11"
+    ],
+    "answer": "I'm sorry, but I couldn't find enough information in the Velmora Help Center to answer this question.",
+    "cited": [],
+    "note": "",
+    "recall": {
+      "1": 1.0,
+      "3": 1.0,
+      "5": 1.0
+    },
+    "rr": 1.0,
+    "all_gold": true,
+    "cited_gold": false,
+    "keyword_score": 0.0,
+    "status": "false_refusal"
+  },
+  {
+    "id": "Q18",
+    "question": "How much does standard delivery cost, and when is it free?",
+    "answerable": true,
+    "answered": true,
+    "retrieved": [
+      "KB-06",
+      "KB-07",
+      "KB-29",
+      "KB-24",
+      "KB-12"
+    ],
+    "gold": [
+      "KB-06"
+    ],
+    "answer": "Standard delivery takes 3 to 5 working days and costs 4.90 EUR; it is free from 60 EUR of purchases.",
+    "cited": [
+      "KB-06",
+      "KB-07"
+    ],
+    "note": "Note: KB-07 (updated 2022-09-14) gives different information. The most recent article, KB-06, is used.",
+    "recall": {
+      "1": 1.0,
+      "3": 1.0,
+      "5": 1.0
+    },
+    "rr": 1.0,
+    "all_gold": true,
+    "cited_gold": true,
+    "keyword_score": 1.0,
+    "status": "good_answer"
+  },
+  {
+    "id": "Q19",
+    "question": "Do I pay for the return label?",
+    "answerable": true,
+    "answered": true,
+    "retrieved": [
+      "KB-12",
+      "KB-14",
+      "KB-16",
+      "KB-02",
+      "KB-24"
+    ],
+    "gold": [
+      "KB-12"
+    ],
+    "answer": "In France the return label is free and prepaid; in other countries the customer pays the return postage.",
+    "cited": [
+      "KB-12"
+    ],
+    "note": "",
+    "recall": {
+      "1": 1.0,
+      "3": 1.0,
+      "5": 1.0
+    },
+    "rr": 1.0,
+    "all_gold": true,
+    "cited_gold": true,
+    "keyword_score": 1.0,
+    "status": "good_answer"
+  },
+  {
+    "id": "Q20",
+    "question": "How do I start a return?",
+    "answerable": true,
+    "answered": true,
+    "retrieved": [
+      "KB-14",
+      "KB-11",
+      "KB-16",
+      "KB-12",
+      "KB-01"
+    ],
+    "gold": [
+      "KB-14"
+    ],
+    "answer": "Open My orders, choose the order, click Return, then select the items and the reason.",
+    "cited": [
+      "KB-14"
+    ],
+    "note": "",
+    "recall": {
+      "1": 1.0,
+      "3": 1.0,
+      "5": 1.0
+    },
+    "rr": 1.0,
+    "all_gold": true,
+    "cited_gold": true,
+    "keyword_score": 0.5,
+    "status": "incomplete_answer"
+  },
+  {
+    "id": "Q21",
+    "question": "Can I get an invoice with my company VAT number after I ordered?",
+    "answerable": true,
+    "answered": true,
+    "retrieved": [
+      "KB-28",
+      "KB-01",
+      "KB-18",
+      "KB-30",
+      "KB-08"
+    ],
+    "gold": [
+      "KB-28"
+    ],
+    "answer": "Enter your company name and VAT number at checkout: an invoice cannot be modified after the order.",
+    "cited": [
+      "KB-28"
+    ],
+    "note": "",
+    "recall": {
+      "1": 1.0,
+      "3": 1.0,
+      "5": 1.0
+    },
+    "rr": 1.0,
+    "all_gold": true,
+    "cited_gold": true,
+    "keyword_score": 1.0,
+    "status": "good_answer"
+  },
+  {
+    "id": "Q22",
+    "question": "I received a broken item. How fast must I report it?",
+    "answerable": true,
+    "answered": false,
+    "retrieved": [
+      "KB-16",
+      "KB-14",
+      "KB-01",
+      "KB-09",
+      "KB-07"
+    ],
+    "gold": [
+      "KB-16"
+    ],
+    "answer": "I'm sorry, but I couldn't find enough information in the Velmora Help Center to answer this question.",
+    "cited": [],
+    "note": "",
+    "recall": {
+      "1": 1.0,
+      "3": 1.0,
+      "5": 1.0
+    },
+    "rr": 1.0,
+    "all_gold": true,
+    "cited_gold": false,
+    "keyword_score": 0.0,
+    "status": "false_refusal"
+  },
+  {
+    "id": "Q23",
+    "question": "How long is the warranty on batteries?",
+    "answerable": true,
+    "answered": true,
+    "retrieved": [
+      "KB-17",
+      "KB-24",
+      "KB-01",
+      "KB-14",
+      "KB-07"
+    ],
+    "gold": [
+      "KB-17"
+    ],
+    "answer": "Batteries and chargers are covered for 1 year.",
+    "cited": [
+      "KB-17"
+    ],
+    "note": "",
+    "recall": {
+      "1": 1.0,
+      "3": 1.0,
+      "5": 1.0
+    },
+    "rr": 1.0,
+    "all_gold": true,
+    "cited_gold": true,
+    "keyword_score": 1.0,
+    "status": "good_answer"
+  },
+  {
+    "id": "Q24",
+    "question": "Can I order a custom colour for my helmet?",
+    "answerable": false,
+    "answered": false,
+    "retrieved": [
+      "KB-28",
+      "KB-18",
+      "KB-12",
+      "KB-03",
+      "KB-23"
+    ],
+    "gold": [],
+    "answer": "I'm sorry, but I couldn't find enough information in the Velmora Help Center to answer this question.",
+    "cited": [],
+    "note": "",
+    "keyword_score": 1.0,
+    "status": "correct_refusal"
+  },
+  {
+    "id": "Q25",
+    "question": "Until when can I cancel an order?",
+    "answerable": true,
+    "answered": true,
+    "retrieved": [
+      "KB-18",
+      "KB-29",
+      "KB-28",
+      "KB-19",
+      "KB-01"
+    ],
+    "gold": [
+      "KB-18"
+    ],
+    "answer": "You can cancel an order in My orders while its status is Received or Preparing.",
+    "cited": [
+      "KB-18"
+    ],
+    "note": "",
+    "recall": {
+      "1": 1.0,
+      "3": 1.0,
+      "5": 1.0
+    },
+    "rr": 1.0,
+    "all_gold": true,
+    "cited_gold": true,
+    "keyword_score": 0.0,
+    "status": "incomplete_answer"
+  },
+  {
+    "id": "Q26",
+    "question": "Can I change the delivery address after ordering?",
+    "answerable": true,
+    "answered": true,
+    "retrieved": [
+      "KB-19",
+      "KB-18",
+      "KB-22",
+      "KB-20",
+      "KB-08"
+    ],
+    "gold": [
+      "KB-19"
+    ],
+    "answer": "You can change the delivery address in My orders until the order status is Packed. After that the address is fixed and you should contact the carrier.",
+    "cited": [
+      "KB-19"
+    ],
+    "note": "",
+    "recall": {
+      "1": 1.0,
+      "3": 1.0,
+      "5": 1.0
+    },
+    "rr": 1.0,
+    "all_gold": true,
+    "cited_gold": true,
+    "keyword_score": 1.0,
+    "status": "good_answer"
+  },
+  {
+    "id": "Q27",
+    "question": "I can't remember how to get into my profile anymore.",
+    "answerable": true,
+    "answered": false,
+    "retrieved": [
+      "KB-14",
+      "KB-21",
+      "KB-01",
+      "KB-30",
+      "KB-03"
+    ],
+    "gold": [
+      "KB-20"
+    ],
+    "answer": "I'm sorry, but I couldn't find enough information in the Velmora Help Center to answer this question.",
+    "cited": [],
+    "note": "",
+    "recall": {
+      "1": 0.0,
+      "3": 0.0,
+      "5": 0.0
+    },
+    "rr": 0.0,
+    "all_gold": false,
+    "cited_gold": false,
+    "keyword_score": 0.0,
+    "status": "false_refusal"
+  },
+  {
+    "id": "Q28",
+    "question": "How long is the password reset link valid?",
+    "answerable": true,
+    "answered": true,
+    "retrieved": [
+      "KB-20",
+      "KB-14",
+      "KB-01",
+      "KB-30",
+      "KB-22"
+    ],
+    "gold": [
+      "KB-20"
+    ],
+    "answer": "We email you a reset link that is valid for 30 minutes.",
+    "cited": [
+      "KB-20"
+    ],
+    "note": "",
+    "recall": {
+      "1": 1.0,
+      "3": 1.0,
+      "5": 1.0
+    },
+    "rr": 1.0,
+    "all_gold": true,
+    "cited_gold": true,
+    "keyword_score": 1.0,
+    "status": "good_answer"
+  },
+  {
+    "id": "Q29",
+    "question": "How do I delete my account?",
+    "answerable": true,
+    "answered": true,
+    "retrieved": [
+      "KB-21",
+      "KB-14",
+      "KB-20",
+      "KB-01",
+      "KB-03"
+    ],
+    "gold": [
+      "KB-21"
+    ],
+    "answer": "Go to Settings, then Privacy, then Delete my account.",
+    "cited": [
+      "KB-21"
+    ],
+    "note": "",
+    "recall": {
+      "1": 1.0,
+      "3": 1.0,
+      "5": 1.0
+    },
+    "rr": 1.0,
+    "all_gold": true,
+    "cited_gold": true,
+    "keyword_score": 0.5,
+    "status": "incomplete_answer"
+  },
+  {
+    "id": "Q30",
+    "question": "What is the carbon footprint of a standard delivery?",
+    "answerable": false,
+    "answered": false,
+    "retrieved": [
+      "KB-07",
+      "KB-06",
+      "KB-24",
+      "KB-16",
+      "KB-12"
+    ],
+    "gold": [],
+    "answer": "I'm sorry, but I couldn't find enough information in the Velmora Help Center to answer this question.",
+    "cited": [],
+    "note": "",
+    "keyword_score": 1.0,
+    "status": "correct_refusal"
+  },
+  {
+    "id": "Q31",
+    "question": "How do I unsubscribe from the newsletter?",
+    "answerable": true,
+    "answered": true,
+    "retrieved": [
+      "KB-22",
+      "KB-01",
+      "KB-14",
+      "KB-11",
+      "KB-16"
+    ],
+    "gold": [
+      "KB-22"
+    ],
+    "answer": "Use the unsubscribe link at the bottom of any newsletter, or go to Settings, then Communication.",
+    "cited": [
+      "KB-22"
+    ],
+    "note": "",
+    "recall": {
+      "1": 1.0,
+      "3": 1.0,
+      "5": 1.0
+    },
+    "rr": 1.0,
+    "all_gold": true,
+    "cited_gold": true,
+    "keyword_score": 0.0,
+    "status": "incomplete_answer"
+  },
+  {
+    "id": "Q32",
+    "question": "What helmet size should I choose with a 57 cm head?",
+    "answerable": true,
+    "answered": true,
+    "retrieved": [
+      "KB-23",
+      "KB-19",
+      "KB-02",
+      "KB-12",
+      "KB-14"
+    ],
+    "gold": [
+      "KB-23"
+    ],
+    "answer": "Size S fits 52 to 55 cm, size M fits 55 to 58 cm and size L fits 58 to 61 cm. If you are between two sizes, choose the larger one and use the thicker pads.",
+    "cited": [
+      "KB-23"
+    ],
+    "note": "",
+    "recall": {
+      "1": 1.0,
+      "3": 1.0,
+      "5": 1.0
+    },
+    "rr": 1.0,
+    "all_gold": true,
+    "cited_gold": true,
+    "keyword_score": 1.0,
+    "status": "good_answer"
+  },
+  {
+    "id": "Q33",
+    "question": "Can I ship an e-bike battery with Express?",
+    "answerable": true,
+    "answered": true,
+    "retrieved": [
+      "KB-24",
+      "KB-01",
+      "KB-07",
+      "KB-28",
+      "KB-29"
+    ],
+    "gold": [
+      "KB-24"
+    ],
+    "answer": "We ship them inside France only, and a returned battery must travel in its original box with the safety label.",
+    "cited": [
+      "KB-24"
+    ],
+    "note": "",
+    "recall": {
+      "1": 1.0,
+      "3": 1.0,
+      "5": 1.0
+    },
+    "rr": 1.0,
+    "all_gold": true,
+    "cited_gold": true,
+    "keyword_score": 0.0,
+    "status": "incomplete_answer"
+  },
+  {
+    "id": "Q34",
+    "question": "I lost the key of my lock. How much is a replacement?",
+    "answerable": true,
+    "answered": true,
+    "retrieved": [
+      "KB-25",
+      "KB-14",
+      "KB-16",
+      "KB-09",
+      "KB-01"
+    ],
+    "gold": [
+      "KB-25"
+    ],
+    "answer": "A replacement key costs 12 EUR, postage included, and arrives within 10 working days. Without the card we cannot cut a new key.",
+    "cited": [
+      "KB-25"
+    ],
+    "note": "",
+    "recall": {
+      "1": 1.0,
+      "3": 1.0,
+      "5": 1.0
+    },
+    "rr": 1.0,
+    "all_gold": true,
+    "cited_gold": true,
+    "keyword_score": 1.0,
+    "status": "good_answer"
+  },
+  {
+    "id": "Q35",
+    "question": "How many loyalty Miles do I need for a 5 EUR voucher?",
+    "answerable": true,
+    "answered": true,
+    "retrieved": [
+      "KB-26",
+      "KB-04",
+      "KB-15",
+      "KB-06",
+      "KB-25"
+    ],
+    "gold": [
+      "KB-26"
+    ],
+    "answer": "500 Miles give a 5 EUR voucher.",
+    "cited": [
+      "KB-26"
+    ],
+    "note": "",
+    "recall": {
+      "1": 1.0,
+      "3": 1.0,
+      "5": 1.0
+    },
+    "rr": 1.0,
+    "all_gold": true,
+    "cited_gold": true,
+    "keyword_score": 1.0,
+    "status": "good_answer"
+  },
+  {
+    "id": "Q36",
+    "question": "When do my loyalty Miles expire?",
+    "answerable": true,
+    "answered": true,
+    "retrieved": [
+      "KB-26",
+      "KB-29",
+      "KB-28",
+      "KB-04",
+      "KB-03"
+    ],
+    "gold": [
+      "KB-26"
+    ],
+    "answer": "Miles expire 12 months after you earn them. Gift card purchases do not earn Miles.",
+    "cited": [
+      "KB-26"
+    ],
+    "note": "",
+    "recall": {
+      "1": 1.0,
+      "3": 1.0,
+      "5": 1.0
+    },
+    "rr": 1.0,
+    "all_gold": true,
+    "cited_gold": true,
+    "keyword_score": 1.0,
+    "status": "good_answer"
+  },
+  {
+    "id": "Q37",
+    "question": "What are the opening hours of customer support?",
+    "answerable": true,
+    "answered": true,
+    "retrieved": [
+      "KB-27",
+      "KB-17",
+      "KB-12",
+      "KB-16",
+      "KB-22"
+    ],
+    "gold": [
+      "KB-27"
+    ],
+    "answer": "Support is available by live chat and by email, Monday to Friday, 9:00 to 18:00 CET. We answer emails within 24 hours on working days.",
+    "cited": [
+      "KB-27"
+    ],
+    "note": "",
+    "recall": {
+      "1": 1.0,
+      "3": 1.0,
+      "5": 1.0
+    },
+    "rr": 1.0,
+    "all_gold": true,
+    "cited_gold": true,
+    "keyword_score": 1.0,
+    "status": "good_answer"
+  },
+  {
+    "id": "Q38",
+    "question": "Do you match the prices of competitors?",
+    "answerable": false,
+    "answered": false,
+    "retrieved": [
+      "KB-06",
+      "KB-16",
+      "KB-29",
+      "KB-20",
+      "KB-26"
+    ],
+    "gold": [],
+    "answer": "I'm sorry, but I couldn't find enough information in the Velmora Help Center to answer this question.",
+    "cited": [],
+    "note": "",
+    "keyword_score": 1.0,
+    "status": "correct_refusal"
+  },
+  {
+    "id": "Q39",
+    "question": "How do I get notified when an out-of-stock item is back?",
+    "answerable": true,
+    "answered": true,
+    "retrieved": [
+      "KB-29",
+      "KB-01",
+      "KB-14",
+      "KB-16",
+      "KB-10"
+    ],
+    "gold": [
+      "KB-29"
+    ],
+    "answer": "On an out-of-stock product, click Notify me and we email you when it is back.",
+    "cited": [
+      "KB-29"
+    ],
+    "note": "",
+    "recall": {
+      "1": 1.0,
+      "3": 1.0,
+      "5": 1.0
+    },
+    "rr": 1.0,
+    "all_gold": true,
+    "cited_gold": true,
+    "keyword_score": 1.0,
+    "status": "good_answer"
+  },
+  {
+    "id": "Q40",
+    "question": "How much is the student discount?",
+    "answerable": true,
+    "answered": true,
+    "retrieved": [
+      "KB-30",
+      "KB-14",
+      "KB-01",
+      "KB-13",
+      "KB-18"
+    ],
+    "gold": [
+      "KB-30"
+    ],
+    "answer": "Students get 10% off. The student code cannot be combined with another promo code.",
+    "cited": [
+      "KB-30"
+    ],
+    "note": "",
+    "recall": {
+      "1": 1.0,
+      "3": 1.0,
+      "5": 1.0
+    },
+    "rr": 1.0,
+    "all_gold": true,
+    "cited_gold": true,
+    "keyword_score": 1.0,
+    "status": "good_answer"
+  }
+]

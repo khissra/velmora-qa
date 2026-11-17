@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Velmora Help Center assistant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f4f0; --surface: #ffffff; --text: #0f1b2d; --muted: #64708a; --border: #e3e1da;
+    --ink: #0a1628; --ink-2: #13233f; --accent: #0f766e; --accent-soft: #d9f0ec; --gold: #b8975a;
+    --btn-bg: #0a1628; --btn-text: #ffffff;
+    --ok-bg: #e4f4ec; --ok-text: #14683a; --no-bg: #fbe9e7; --no-text: #9c2a1f;
+    --warn-bg: #faf3e2; --warn-text: #6b4a0e; --warn-border: #e6d2a0;
+    --tag-bg: #edf0f5; --tag-text: #1d3557;
+    --s-good: #2e9e5b; --s-incomplete: #e09a2b; --s-falseref: #d9534f;
+    --s-correctref: #4a86b8; --s-falseans: #6a1b1b;
+    --shadow: 0 1px 2px rgba(10,22,40,.04), 0 8px 24px -12px rgba(10,22,40,.12);
+    --serif: "Fraunces", Georgia, "Times New Roman", serif;
+    --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0a111e; --surface: #111b2d; --text: #e9edf5; --muted: #93a0b8; --border: #22304a;
+      --accent: #5eead4; --accent-soft: #123a3a; --gold: #d4b57a;
+      --btn-bg: #5eead4; --btn-text: #06201d;
+      --ok-bg: #12301f; --ok-text: #7fe0a6; --no-bg: #3a1717; --no-text: #ffa5a5;
+      --warn-bg: #2f2510; --warn-text: #f1d493; --warn-border: #6b5220;
+      --tag-bg: #1b2943; --tag-text: #c6d4f0;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.6);
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 15.5px/1.6 var(--sans); -webkit-font-smoothing: antialiased; }
+  main { max-width: 1040px; margin: 0 auto; padding: 36px 20px 40px; }
+  h1, h3 { font-family: var(--serif); font-weight: 500; letter-spacing: -.01em; }
+  h2 { font-size: .72rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--muted);
+    margin: 0 0 14px; display: flex; align-items: center; gap: 10px; }
+  h2::before { content: ""; width: 22px; height: 1px; background: var(--gold); }
+  .sub { color: rgba(255,255,255,.72); font-size: 1.02rem; max-width: 620px; }
+
+  /* top bar + hero */
+  .topbar { background: var(--ink); color: #fff; border-bottom: 1px solid rgba(255,255,255,.08); }
+  .topbar div { max-width: 1040px; margin: 0 auto; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; }
+  .brand { font-family: var(--serif); font-size: 1.25rem; letter-spacing: .02em; }
+  .brand i { color: var(--gold); font-style: normal; }
+  .topbar small { color: rgba(255,255,255,.6); letter-spacing: .12em; text-transform: uppercase; font-size: .7rem; }
+  .hero { color: #fff; background:
+      radial-gradient(900px 340px at 85% -10%, rgba(94,234,212,.16), transparent 60%),
+      linear-gradient(160deg, var(--ink) 0%, var(--ink-2) 100%); }
+  .hero-in { max-width: 1040px; margin: 0 auto; padding: 56px 20px 64px; }
+  .eyebrow { color: var(--gold); letter-spacing: .18em; text-transform: uppercase; font-size: .72rem; font-weight: 600; margin-bottom: 14px; }
+  .hero h1 { margin: 0 0 14px; font-size: clamp(1.9rem, 4.4vw, 3rem); line-height: 1.12; max-width: 760px; }
+  .badge { display: inline-block; padding: 3px 12px; border-radius: 999px; font-size: .76rem; margin: 22px 8px 0 0;
+    background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16); color: rgba(255,255,255,.88); }
+  #config { color: rgba(255,255,255,.8); }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px;
+    padding: 24px 26px; margin-bottom: 18px; box-shadow: var(--shadow); }
+  button { font: inherit; cursor: pointer; border-radius: 999px; border: 1px solid transparent; transition: .18s ease; }
+  button.primary { padding: 11px 26px; background: var(--btn-bg); color: var(--btn-text); font-weight: 600; letter-spacing: .01em; }
+  button.primary::after { content: " \2197"; }
+  button.primary:hover { transform: translateY(-1px); box-shadow: 0 8px 18px -8px rgba(10,22,40,.5); }
+  button.primary:disabled { opacity: .55; cursor: wait; transform: none; box-shadow: none; }
+  button.secondary { padding: 7px 16px; background: transparent; color: var(--text); border-color: var(--border); font-size: .88rem; }
+  button.secondary:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+  button.secondary:disabled { opacity: .45; cursor: not-allowed; }
+  button.link { background: none; border: 0; padding: 0; color: var(--text); text-align: left; font-weight: 600; border-radius: 0; }
+  button.link::after { content: " \2192"; color: var(--accent); }
+  button.link:hover { color: var(--accent); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* parameters */
+  .params { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 22px 28px; }
+  .params label { display: block; font-size: .88rem; font-weight: 600; }
+  .params .hint { display: block; font-weight: 400; color: var(--muted); font-size: .78rem; margin-top: 4px; line-height: 1.4; }
+  .params select, .params input[type="range"] { width: 100%; margin-top: 8px; }
+  .params select { padding: 9px 12px; font: inherit; color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: 10px; }
+  .params input[type="range"] { accent-color: var(--accent); }
+  .params output { float: right; font-variant-numeric: tabular-nums; color: var(--accent); font-weight: 700; }
+  .params-foot { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); display: flex; gap: 12px; align-items: center; }
+
+  /* tabs */
+  .tabs { display: inline-flex; gap: 4px; margin: 10px 0 22px; padding: 4px; background: var(--surface); border: 1px solid var(--border); border-radius: 999px; }
+  .tab { padding: 8px 24px; background: transparent; color: var(--muted); font-weight: 500; }
+  .tab[aria-selected="true"] { background: var(--ink); color: #fff; }
+  @media (prefers-color-scheme: dark) { .tab[aria-selected="true"] { background: var(--accent); color: #06201d; } }
+  [hidden] { display: none !important; }
+
+  /* ask */
+  form { display: flex; gap: 10px; margin-bottom: 18px; padding: 8px; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 999px; box-shadow: var(--shadow); }
+  input[type="text"] { flex: 1; padding: 11px 18px; font: inherit; color: var(--text); background: transparent; border: 0; border-radius: 999px; }
+  input[type="text"]:focus { outline: none; }
+  form:focus-within { border-color: var(--accent); }
+  .qlist-head { display: flex; gap: 10px; margin-bottom: 10px; }
+  .qlist-head input { flex: 1; padding: 9px 16px; font-size: .9rem; background: var(--bg); border: 1px solid var(--border); }
+  .qlist-head input:focus { border-color: var(--accent); }
+  .qlist { max-height: 300px; overflow-y: auto; border-top: 1px solid var(--border); }
+  .qitem { display: flex; gap: 14px; width: 100%; padding: 10px 8px; text-align: left; background: none; color: var(--text);
+    border: 0; border-bottom: 1px solid var(--border); border-radius: 0; font-size: .92rem; }
+  .qitem:hover { background: var(--tag-bg); padding-left: 14px; }
+  .qid { color: var(--gold); min-width: 40px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .qno { margin-left: auto; font-size: .7rem; color: var(--warn-text); background: var(--warn-bg); border: 1px solid var(--warn-border);
+    padding: 0 10px; border-radius: 999px; white-space: nowrap; align-self: center; }
+  .status { display: inline-block; padding: 4px 14px; border-radius: 999px; font-size: .8rem; font-weight: 600; letter-spacing: .02em; }
+  .status.ok { background: var(--ok-bg); color: var(--ok-text); }
+  .status.no { background: var(--no-bg); color: var(--no-text); }
+  .q { font-family: var(--serif); font-size: 1.3rem; line-height: 1.3; margin: 14px 0 12px; }
+  .answer p { margin: 8px 0; }
+  .tag { display: inline-block; margin-left: 8px; padding: 0 8px; font-size: .72rem; font-weight: 600; background: var(--accent-soft);
+    color: var(--accent); border-radius: 6px; vertical-align: 1px; }
+  .meta { color: var(--muted); font-size: .84rem; }
+  .note { background: var(--warn-bg); color: var(--warn-text); border: 1px solid var(--warn-border); border-left: 3px solid var(--gold);
+    border-radius: 12px; padding: 12px 16px; font-size: .92rem; }
+  .note strong { display: block; margin-bottom: 4px; }
+  .note p { margin: 4px 0; }
+  ul.sources { list-style: none; margin: 0; padding: 0; }
+  ul.sources li { padding: 10px 0; border-top: 1px solid var(--border); }
+  ul.sources li:first-child { border-top: 0; }
+  details summary { cursor: pointer; color: var(--muted); font-size: .9rem; }
+  .error { background: var(--no-bg); color: var(--no-text); border-radius: 12px; padding: 14px 16px; }
+  .empty { color: var(--muted); text-align: center; padding: 36px 0; font-family: var(--serif); font-size: 1.05rem; }
+
+  /* tables */
+  table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: .86rem; }
+  th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
+  td.num { font-variant-numeric: tabular-nums; }
+  .scroll { overflow-x: auto; }
+
+  /* evaluation */
+  .eval-bar { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+  .metric { border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; background: var(--bg); }
+  .metric .v { font-family: var(--serif); font-size: 1.7rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .metric .l { font-size: .74rem; color: var(--muted); margin-top: 4px; }
+  .stack { display: flex; height: 12px; border-radius: 999px; overflow: hidden; margin: 18px 0 10px; background: var(--border); }
+  .stack div { height: 100%; }
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: .8rem; color: var(--muted); }
+  .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; }
+  .st { display: inline-block; padding: 1px 10px; border-radius: 999px; font-size: .74rem; font-weight: 600; color: #fff; white-space: nowrap; }
+  .good_answer { background: var(--s-good); } .incomplete_answer { background: var(--s-incomplete); }
+  .false_refusal { background: var(--s-falseref); } .correct_refusal { background: var(--s-correctref); }
+  .false_answer { background: var(--s-falseans); }
+  tr.row { cursor: pointer; } tr.row:hover { background: var(--tag-bg); }
+  tr.detail td { background: var(--bg); font-size: .84rem; }
+  tr.detail p { margin: 4px 0; }
+  .filters { display: flex; gap: 10px; align-items: center; margin-bottom: 4px; }
+  .filters select { padding: 6px 12px; font: inherit; color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: 999px; }
+
+  dialog { width: min(680px, 92vw); max-height: 80vh; background: var(--surface); color: var(--text);
+    border: 1px solid var(--border); border-radius: 18px; padding: 26px; box-shadow: 0 30px 80px -20px rgba(0,0,0,.5); }
+  dialog::backdrop { background: rgba(10,22,40,.6); backdrop-filter: blur(3px); }
+  dialog h3 { margin: 0 0 4px; font-size: 1.4rem; }
+  dialog pre { white-space: pre-wrap; font: inherit; margin: 14px 0; }
+
+  footer { border-top: 1px solid var(--border); padding: 26px 20px 40px; text-align: center; color: var(--muted); font-size: .8rem; letter-spacing: .04em; }
+  footer b { color: var(--gold); font-weight: 600; }
+  @media (max-width: 600px) { .card { padding: 18px; } .topbar small { display: none; } form { border-radius: 22px; flex-wrap: wrap; } form input { flex-basis: 100%; } }
+</style>
+</head>
+<body>
+<div class="topbar"><div><span class="brand">Velmora<i>.</i></span><small>Help Center</small></div></div>
+<div class="hero"><div class="hero-in">
+  <div class="eyebrow">Assistant IA &middot; Base de connaissance</div>
+  <h1>Des r&eacute;ponses fiables, issues uniquement de votre centre d&rsquo;aide.</h1>
+  <div class="sub">The assistant answers only from the help center articles, and says so when it does not know.</div>
+  <div id="config"></div>
+</div></div>
+<main>
+  <section class="card">
+    <h2>01 / Parameters</h2>
+    <div class="params">
+      <label>Retrieval method
+        <select id="p-method"></select>
+        <span class="hint" id="h-method"></span>
+      </label>
+      <label>Reranker
+        <select id="p-rerank"></select>
+        <span class="hint">Reorders the retrieved articles. "llm" is slow (~1 GB model).</span>
+      </label>
+      <label>Threshold tau <output id="o-tau"></output>
+        <input type="range" id="p-tau" min="0" max="1" step="0.01">
+        <span class="hint">Higher = more "I don't know". An article is used only if it reaches tau.</span>
+      </label>
+      <label>Sentence ratio rho <output id="o-rho"></output>
+        <input type="range" id="p-rho" min="0" max="1" step="0.05">
+        <span class="hint">Keeps sentences scoring at least rho x the best one. Lower = longer answers.</span>
+      </label>
+      <label>Articles retrieved (top_n) <output id="o-top_n"></output>
+        <input type="range" id="p-top_n" min="1" max="10" step="1">
+        <span class="hint">How many articles are considered before the threshold.</span>
+      </label>
+    </div>
+    <div class="params-foot">
+      <button type="button" class="secondary" id="reset">Reset to defaults</button>
+      <span class="meta">The parameters apply to both tabs.</span>
+    </div>
+  </section>
+
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" id="tab-ask" aria-selected="true" data-target="panel-ask">Ask</button>
+    <button class="tab" role="tab" id="tab-eval" aria-selected="false" data-target="panel-eval">Evaluation</button>
+  </div>
+
+  <!-- ASK -->
+  <section id="panel-ask">
+    <form id="form" autocomplete="off">
+      <input type="text" id="question" maxlength="500" placeholder="Type a question, or pick one in the list below">
+      <button type="submit" id="submit" class="primary">Ask</button>
+    </form>
+
+    <div class="card">
+      <h2>02 / All questions (<span id="qcount">0</span>)</h2>
+      <div class="qlist-head">
+        <input type="text" id="qfilter" placeholder="Filter the questions...">
+      </div>
+      <div class="qlist" id="qlist"></div>
+    </div>
+
+    <div id="result"><div class="empty">Ask a question to see the answer, the sources and the retrieval details.</div></div>
+  </section>
+
+  <!-- EVALUATION -->
+  <section id="panel-eval" hidden>
+    <div class="card">
+      <div class="eval-bar">
+        <button type="button" class="primary" id="run-eval">Run the evaluation</button>
+        <button type="button" class="secondary" id="download" disabled>Download results (JSON)</button>
+        <span class="meta" id="eval-status"></span>
+      </div>
+      <p class="meta" style="margin-bottom:0">Runs the assistant on every question of eval.jsonl with the parameters above.
+        Only the question is sent to the assistant; the expected answers are used for scoring only.
+        If you tune the parameters here and keep the best run, the score is in-sample (optimistic).</p>
+    </div>
+    <div id="eval-out"></div>
+    <div id="runs-card" class="card" hidden>
+      <h2>Runs (newest first)</h2>
+      <div class="scroll"><table id="runs"></table></div>
+      <div class="params-foot"><button type="button" class="secondary" id="clear-runs">Clear the list</button></div>
+    </div>
+  </section>
+</main>
+<footer>&copy; 2026 <b>Velmora</b> &middot; Help Center assistant</footer>
+
+<dialog id="article-dialog">
+  <h3 id="article-title"></h3>
+  <div class="meta" id="article-meta"></div>
+  <pre id="article-content"></pre>
+  <button type="button" class="secondary" id="article-close">Close</button>
+</dialog>
+
+<script>
+"use strict";
+
+const STATUS_LABELS = {
+  good_answer: "Good answer", incomplete_answer: "Incomplete",
+  false_refusal: "False refusal", correct_refusal: "Correct refusal", false_answer: "False answer"
+};
+const STATUS_COLORS = {
+  good_answer: "var(--s-good)", incomplete_answer: "var(--s-incomplete)",
+  false_refusal: "var(--s-falseref)", correct_refusal: "var(--s-correctref)", false_answer: "var(--s-falseans)"
+};
+const STATUSES = Object.keys(STATUS_LABELS);
+
+let CONFIG = null;
+let QUESTIONS = [];
+// Fallback data (extracted from eval.jsonl): used if the server does not answer.
+const FALLBACK_QUESTIONS = [
+ {
+  "id": "Q01",
+  "question": "How long does standard delivery take?",
+  "answerable": true
+ },
+ {
+  "id": "Q02",
+  "question": "Which payment methods can I use?",
+  "answerable": true
+ },
+ {
+  "id": "Q03",
+  "question": "How much does Express delivery cost?",
+  "answerable": true
+ },
+ {
+  "id": "Q04",
+  "question": "How many days do I have to return an item?",
+  "answerable": true
+ },
+ {
+  "id": "Q05",
+  "question": "My package has been stuck on the same status for a week. What should I do?",
+  "answerable": true
+ },
+ {
+  "id": "Q06",
+  "question": "Do you have a physical shop in Lyon?",
+  "answerable": false
+ },
+ {
+  "id": "Q07",
+  "question": "How long is a gift card valid?",
+  "answerable": true
+ },
+ {
+  "id": "Q08",
+  "question": "How long do refunds take?",
+  "answerable": true
+ },
+ {
+  "id": "Q09",
+  "question": "Can I use two promo codes on the same order?",
+  "answerable": true
+ },
+ {
+  "id": "Q10",
+  "question": "How fast is Express delivery and what is the order cut-off time?",
+  "answerable": true
+ },
+ {
+  "id": "Q11",
+  "question": "My card payment was declined. How many times can I retry?",
+  "answerable": true
+ },
+ {
+  "id": "Q12",
+  "question": "How can I become a Velmora reseller?",
+  "answerable": false
+ },
+ {
+  "id": "Q13",
+  "question": "Where can I find my tracking link?",
+  "answerable": true
+ },
+ {
+  "id": "Q14",
+  "question": "How long is an order held at a pickup point?",
+  "answerable": true
+ },
+ {
+  "id": "Q15",
+  "question": "Can I send back something I bought by mistake?",
+  "answerable": true
+ },
+ {
+  "id": "Q16",
+  "question": "Which countries do you deliver to outside France?",
+  "answerable": true
+ },
+ {
+  "id": "Q17",
+  "question": "Can you deliver to Switzerland?",
+  "answerable": true
+ },
+ {
+  "id": "Q18",
+  "question": "How much does standard delivery cost, and when is it free?",
+  "answerable": true
+ },
+ {
+  "id": "Q19",
+  "question": "Do I pay for the return label?",
+  "answerable": true
+ },
+ {
+  "id": "Q20",
+  "question": "How do I start a return?",
+  "answerable": true
+ },
+ {
+  "id": "Q21",
+  "question": "Can I get an invoice with my company VAT number after I ordered?",
+  "answerable": true
+ },
+ {
+  "id": "Q22",
+  "question": "I received a broken item. How fast must I report it?",
+  "answerable": true
+ },
+ {
+  "id": "Q23",
+  "question": "How long is the warranty on batteries?",
+  "answerable": true
+ },
+ {
+  "id": "Q24",
+  "question": "Can I order a custom colour for my helmet?",
+  "answerable": false
+ },
+ {
+  "id": "Q25",
+  "question": "Until when can I cancel an order?",
+  "answerable": true
+ },
+ {
+  "id": "Q26",
+  "question": "Can I change the delivery address after ordering?",
+  "answerable": true
+ },
+ {
+  "id": "Q27",
+  "question": "I can't remember how to get into my profile anymore.",
+  "answerable": true
+ },
+ {
+  "id": "Q28",
+  "question": "How long is the password reset link valid?",
+  "answerable": true
+ },
+ {
+  "id": "Q29",
+  "question": "How do I delete my account?",
+  "answerable": true
+ },
+ {
+  "id": "Q30",
+  "question": "What is the carbon footprint of a standard delivery?",
+  "answerable": false
+ },
+ {
+  "id": "Q31",
+  "question": "How do I unsubscribe from the newsletter?",
+  "answerable": true
+ },
+ {
+  "id": "Q32",
+  "question": "What helmet size should I choose with a 57 cm head?",
+  "answerable": true
+ },
+ {
+  "id": "Q33",
+  "question": "Can I ship an e-bike battery with Express?",
+  "answerable": true
+ },
+ {
+  "id": "Q34",
+  "question": "I lost the key of my lock. How much is a replacement?",
+  "answerable": true
+ },
+ {
+  "id": "Q35",
+  "question": "How many loyalty Miles do I need for a 5 EUR voucher?",
+  "answerable": true
+ },
+ {
+  "id": "Q36",
+  "question": "When do my loyalty Miles expire?",
+  "answerable": true
+ },
+ {
+  "id": "Q37",
+  "question": "What are the opening hours of customer support?",
+  "answerable": true
+ },
+ {
+  "id": "Q38",
+  "question": "Do you match the prices of competitors?",
+  "answerable": false
+ },
+ {
+  "id": "Q39",
+  "question": "How do I get notified when an out-of-stock item is back?",
+  "answerable": true
+ },
+ {
+  "id": "Q40",
+  "question": "How much is the student discount?",
+  "answerable": true
+ }
+];
+const FALLBACK_CONFIG = {
+  method: "embeddings", methods: ["bm25", "embeddings"], reranker: "cross",
+  rerankers: ["none", "cross", "semantic", "llm"], top_n: 5, articles: "?", eval_questions: 40,
+  defaults: { bm25: { tau: 0.30, rho: 0.60 }, embeddings: { tau: 0.40, rho: 0.60 } }
+};
+let lastEval = null;
+let runs = [];
+
+const $ = (selector) => document.querySelector(selector);
+
+function el(tag, className, text) {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  if (text !== undefined) node.textContent = text;  // textContent only: no HTML injection
+  return node;
+}
+
+async function api(path, body) {
+  const options = body === undefined ? undefined : {
+    method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body)
+  };
+  const res = await fetch(path, options);
+  let data = null;
+  try { data = await res.json(); } catch (error) { /* not JSON */ }
+  if (!res.ok) throw new Error((data && data.error) || res.statusText);
+  return data;
+}
+
+const fmt = (value) => Number(value).toFixed(2);
+
+// ---------- parameters ----------
+
+function setSlider(name, value) {
+  $(`#p-${name}`).value = value;
+  $(`#o-${name}`).textContent = name === "top_n" ? String(value) : fmt(value);
+}
+
+function applyDefaults(method) {
+  const fb = FALLBACK_CONFIG.defaults[method] || FALLBACK_CONFIG.defaults.embeddings;
+  const d = (CONFIG.defaults && CONFIG.defaults[method]) || {};
+  const pick = (value, fallback) => (value === null || value === undefined || isNaN(Number(value))) ? fallback : Number(value);
+  setSlider("tau", pick(d.tau, fb.tau));
+  setSlider("rho", pick(d.rho, fb.rho));
+  setSlider("top_n", pick(CONFIG.top_n, FALLBACK_CONFIG.top_n));
+}
+
+function methodHint() {
+  $("#h-method").textContent = $("#p-method").value === "embeddings"
+    ? "Embeddings: tau is a cosine score on the best sentence."
+    : "BM25: tau is the share of the question's keywords found in the article.";
+}
+
+function getParams() {
+  return {
+    method: $("#p-method").value,
+    rerank: $("#p-rerank").value,
+    tau: parseFloat($("#p-tau").value),
+    rho: parseFloat($("#p-rho").value),
+    top_n: parseInt($("#p-top_n").value, 10)
+  };
+}
+
+function buildParams() {
+  for (const method of CONFIG.methods) {
+    const option = el("option", null, method);
+    option.value = method;
+    $("#p-method").append(option);
+  }
+  for (const name of CONFIG.rerankers) {
+    const option = el("option", null, name);
+    option.value = name;
+    $("#p-rerank").append(option);
+  }
+  $("#p-method").value = CONFIG.method;
+  $("#p-rerank").value = CONFIG.reranker;
+  applyDefaults(CONFIG.method);
+  methodHint();
+
+  for (const name of ["tau", "rho", "top_n"]) {
+    $(`#p-${name}`).addEventListener("input", (event) => setSlider(name, event.target.value));
+  }
+  $("#p-method").addEventListener("change", () => { applyDefaults($("#p-method").value); methodHint(); });
+  $("#reset").addEventListener("click", () => {
+    $("#p-method").value = CONFIG.method;
+    $("#p-rerank").value = CONFIG.reranker;
+    applyDefaults(CONFIG.method);
+    methodHint();
+  });
+}
+
+function paramsText(params) {
+  return `${params.method} \u00b7 reranker: ${params.rerank} \u00b7 tau ${fmt(params.tau)} \u00b7 rho ${fmt(params.rho)} \u00b7 top_n ${params.top_n}`;
+}
+
+// ---------- tabs ----------
+
+function buildTabs() {
+  for (const tab of document.querySelectorAll(".tab")) {
+    tab.addEventListener("click", () => {
+      for (const other of document.querySelectorAll(".tab")) {
+        const selected = other === tab;
+        other.setAttribute("aria-selected", String(selected));
+        $(`#${other.dataset.target}`).hidden = !selected;
+      }
+    });
+  }
+}
+
+// ---------- questions list ----------
+
+function buildQuestionList() {
+  $("#qcount").textContent = QUESTIONS.length;
+  const list = $("#qlist");
+  list.textContent = "";
+  if (!QUESTIONS.length) {
+    list.append(el("div", "empty", "No eval.jsonl loaded. Start the server with --eval path/to/eval.jsonl."));
+    return;
+  }
+  for (const item of QUESTIONS) {
+    const row = el("button", "qitem");
+    row.type = "button";
+    row.dataset.search = `${item.id} ${item.question}`.toLowerCase();
+    row.append(el("span", "qid", item.id), el("span", null, item.question));
+    if (!item.answerable) row.append(el("span", "qno", "no answer in the help center"));
+    row.addEventListener("click", () => {
+      $("#question").value = item.question;
+      ask(item.question);
+    });
+    list.append(row);
+  }
+}
+
+function filterQuestions() {
+  const text = $("#qfilter").value.trim().toLowerCase();
+  for (const row of document.querySelectorAll(".qitem")) {
+    row.hidden = text !== "" && !row.dataset.search.includes(text);
+  }
+}
+
+// ---------- ask ----------
+
+function renderAnswer(data) {
+  const result = $("#result");
+  result.textContent = "";
+
+  const card = el("div", "card");
+  card.append(el("span", data.answered ? "status ok" : "status no", data.answered ? "Answered" : "I don't know"));
+  card.append(el("div", "q", data.question));
+  const answer = el("div", "answer");
+  if (data.answered && data.evidence && data.evidence.length) {
+    for (const item of data.evidence) {
+      const p = el("p", null, item.text);
+      p.append(el("span", "tag", item.article_id));
+      answer.append(p);
+    }
+  } else {
+    answer.append(el("p", null, data.text));
+  }
+  card.append(answer, el("div", "meta", paramsText(data.params)));
+  result.append(card);
+
+  if (data.note) {
+    const wrapper = el("div", "card");
+    const note = el("div", "note");
+    note.append(el("strong", null, "Heads up"));
+    for (const line of data.note.split("\n").filter(Boolean)) note.append(el("p", null, line));
+    wrapper.append(note);
+    result.append(wrapper);
+  }
+
+  if (data.sources && data.sources.length) {
+    const card2 = el("div", "card");
+    card2.append(el("h2", null, "Sources"));
+    const list = el("ul", "sources");
+    for (const source of data.sources) {
+      const li = el("li");
+      const open = el("button", "link", `${source.id} \u00b7 ${source.title}`);
+      open.type = "button";
+      open.addEventListener("click", () => openArticle(source.id));
+      li.append(open, el("div", "meta", `Updated: ${source.updated}`));
+      list.append(li);
+    }
+    card2.append(list);
+    result.append(card2);
+  }
+
+  if (data.retrieved && data.retrieved.length) {
+    const card3 = el("div", "card");
+    const details = el("details");
+    details.append(el("summary", null, "Retrieval details (top articles and scores)"));
+    const table = el("table");
+    const head = el("tr");
+    for (const name of ["Article", "Title", "Score", "Covered"]) head.append(el("th", null, name));
+    table.append(head);
+    for (const row of data.retrieved) {
+      const tr = el("tr");
+      tr.append(el("td", null, row.id), el("td", null, row.title),
+                el("td", "num", row.score.toFixed(3)), el("td", null, row.covered ? "yes" : "no"));
+      table.append(tr);
+    }
+    details.append(table);
+    card3.append(details);
+    result.append(card3);
+  }
+}
+
+function renderMessage(target, message, isError) {
+  target.textContent = "";
+  target.append(el("div", isError ? "error" : "empty", message));
+}
+
+async function ask(question) {
+  const button = $("#submit");
+  button.disabled = true;
+  button.textContent = "Searching...";
+  try {
+    renderAnswer(await api("/api/ask", { question, params: getParams() }));
+  } catch (error) {
+    renderMessage($("#result"), `Error: ${error.message}`, true);
+  } finally {
+    button.disabled = false;
+    button.textContent = "Ask";
+  }
+}
+
+async function openArticle(id) {
+  try {
+    const article = await api(`/api/article/${encodeURIComponent(id)}`);
+    $("#article-title").textContent = `${article.id} \u00b7 ${article.title}`;
+    $("#article-meta").textContent = `${article.category} \u00b7 Updated: ${article.updated}`;
+    $("#article-content").textContent = article.content;
+    $("#article-dialog").showModal();
+  } catch (error) {
+    renderMessage($("#result"), `Error: ${error.message}`, true);
+  }
+}
+
+// ---------- evaluation ----------
+
+function metric(label, value) {
+  const box = el("div", "metric");
+  box.append(el("div", "v", value), el("div", "l", label));
+  return box;
+}
+
+function statusTag(status) {
+  return el("span", `st ${status}`, STATUS_LABELS[status] || status);
+}
+
+function renderEvaluation(data) {
+  const out = $("#eval-out");
+  out.textContent = "";
+  const s = data.summary;
+
+  const top = el("div", "card");
+  top.append(el("h2", null, `Result - ${s.questions} questions (${s.answerable} answerable, ${s.unanswerable} unanswerable)`));
+  top.append(el("div", "meta", paramsText(data.params)));
+
+  const answers = el("div", "metrics");
+  answers.style.marginTop = "12px";
+  answers.append(
+    metric("Accuracy (good + correct refusal)", fmt(s.accuracy)),
+    metric("Answer rate (answerable)", fmt(s.answer_rate)),
+    metric("Refusal rate (unanswerable)", fmt(s.refusal_rate)),
+    metric("Cited a gold article", fmt(s.cited_gold)),
+    metric("Keyword score (answered)", fmt(s.keyword_score))
+  );
+  top.append(answers);
+
+  const stack = el("div", "stack");
+  const legend = el("div", "legend");
+  for (const status of STATUSES) {
+    const count = s.status[status];
+    if (count > 0) {
+      const part = el("div");
+      part.style.width = `${(count / s.questions) * 100}%`;
+      part.style.background = STATUS_COLORS[status];
+      part.title = `${STATUS_LABELS[status]}: ${count}`;
+      stack.append(part);
+    }
+    const item = el("span");
+    const dot = el("span", "dot");
+    dot.style.background = STATUS_COLORS[status];
+    item.append(dot, document.createTextNode(`${STATUS_LABELS[status]}: ${count}`));
+    legend.append(item);
+  }
+  top.append(stack, legend);
+  out.append(top);
+
+  const retrieval = el("div", "card");
+  retrieval.append(el("h2", null, "Retrieval (answerable questions)"));
+  const metrics = el("div", "metrics");
+  metrics.append(
+    metric("Recall@1", fmt(s.recall["1"])), metric("Recall@3", fmt(s.recall["3"])),
+    metric("Recall@5", fmt(s.recall["5"])), metric("MRR", fmt(s.mrr)),
+    metric("All gold in top-5", fmt(s.all_gold)),
+    metric("Top score, answerable (min)", s.top_score_answerable_min === null ? "-" : fmt(s.top_score_answerable_min)),
+    metric("Top score, unanswerable (max)", s.top_score_unanswerable_max === null ? "-" : fmt(s.top_score_unanswerable_max))
+  );
+  retrieval.append(metrics);
+  out.append(retrieval);
+
+  out.append(buildQuestionTable(data.rows));
+}
+
+function buildQuestionTable(rows) {
+  const card = el("div", "card");
+  card.append(el("h2", null, "Per question (click a row for the details)"));
+
+  const filters = el("div", "filters");
+  const select = el("select");
+  const options = [["all", "All"], ["problems", "Problems only"]].concat(STATUSES.map((s) => [s, STATUS_LABELS[s]]));
+  for (const [value, label] of options) {
+    const option = el("option", null, label);
+    option.value = value;
+    select.append(option);
+  }
+  filters.append(el("span", "meta", "Show:"), select);
+  card.append(filters);
+
+  const wrap = el("div", "scroll");
+  const table = el("table");
+  wrap.append(table);
+  card.append(wrap);
+
+  function draw() {
+    table.textContent = "";
+    const head = el("tr");
+    for (const name of ["Id", "Status", "Question", "Top score"]) head.append(el("th", null, name));
+    table.append(head);
+
+    for (const r of rows) {
+      const isGood = r.status === "good_answer" || r.status === "correct_refusal";
+      if (select.value === "problems" && isGood) continue;
+      if (STATUSES.includes(select.value) && r.status !== select.value) continue;
+
+      const tr = el("tr", "row");
+      const statusCell = el("td");
+      statusCell.append(statusTag(r.status));
+      tr.append(el("td", null, r.id), statusCell, el("td", null, r.question), el("td", "num", fmt(r.top_score)));
+
+      const detail = el("tr", "detail");
+      detail.hidden = true;
+      const cell = el("td");
+      cell.colSpan = 4;
+      cell.append(el("p", null, `Answer: ${r.answer}`));
+      if (r.note) cell.append(el("p", null, r.note));
+      cell.append(el("p", "meta", `Gold: ${r.gold.join(", ") || "-"} \u00b7 Retrieved: ${r.retrieved.join(", ") || "-"} \u00b7 Cited: ${r.cited.join(", ") || "-"}`));
+      cell.append(el("p", "meta", `Missing keywords: ${r.missing.join(", ") || "none"} \u00b7 Keyword score: ${fmt(r.keyword_score)}`));
+      detail.append(cell);
+
+      tr.addEventListener("click", () => { detail.hidden = !detail.hidden; });
+      table.append(tr, detail);
+    }
+  }
+  select.addEventListener("change", draw);
+  draw();
+  return card;
+}
+
+function renderRuns() {
+  const card = $("#runs-card");
+  card.hidden = runs.length === 0;
+  const table = $("#runs");
+  table.textContent = "";
+  const head = el("tr");
+  for (const name of ["#", "Method", "Reranker", "tau", "rho", "top_n", "Good", "Incompl.", "False ref.", "Corr. ref.", "False ans.", "Accuracy"]) {
+    head.append(el("th", null, name));
+  }
+  table.append(head);
+  for (const run of runs) {
+    const tr = el("tr");
+    const p = run.params, s = run.summary.status;
+    for (const value of [run.number, p.method, p.rerank, fmt(p.tau), fmt(p.rho), p.top_n,
+                         s.good_answer, s.incomplete_answer, s.false_refusal, s.correct_refusal, s.false_answer,
+                         fmt(run.summary.accuracy)]) {
+      tr.append(el("td", "num", String(value)));
+    }
+    table.append(tr);
+  }
+}
+
+async function runEvaluation() {
+  const button = $("#run-eval");
+  button.disabled = true;
+  $("#eval-status").textContent = "Running on all questions (the first run can take a moment)...";
+  try {
+    const data = await api("/api/evaluate", { params: getParams() });
+    lastEval = data;
+    runs.unshift({ number: runs.length ? runs[0].number + 1 : 1, params: data.params, summary: data.summary });
+    renderEvaluation(data);
+    renderRuns();
+    $("#download").disabled = false;
+    $("#eval-status").textContent = `Done: ${data.summary.questions} questions.`;
+  } catch (error) {
+    $("#eval-status").textContent = `Error: ${error.message}`;
+  } finally {
+    button.disabled = false;
+  }
+}
+
+function downloadResults() {
+  if (!lastEval) return;
+  const blob = new Blob([JSON.stringify(lastEval, null, 2)], { type: "application/json" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "eval_results.json";
+  link.click();
+  URL.revokeObjectURL(link.href);
+}
+
+// ---------- start ----------
+
+async function init() {
+  let offline = false;
+  try { CONFIG = await api("/api/config"); }
+  catch (error) { CONFIG = FALLBACK_CONFIG; offline = true; }
+  try { QUESTIONS = await api("/api/questions"); }
+  catch (error) { QUESTIONS = FALLBACK_QUESTIONS; offline = true; }
+  if (!Array.isArray(QUESTIONS) || !QUESTIONS.length) QUESTIONS = FALLBACK_QUESTIONS;
+
+  const box = $("#config");
+  if (offline) {
+    box.textContent = "Server not reachable (is app.py running? open http://127.0.0.1:8000, not the file). Showing offline data.";
+  } else {
+    box.append(
+      el("span", "badge", `${CONFIG.articles} articles`),
+      el("span", "badge", `${CONFIG.eval_questions} eval questions`),
+      el("span", "badge", `methods: ${CONFIG.methods.join(", ")}`)
+    );
+  }
+  // each block is independent: one failure no longer hides the others
+  for (const step of [buildQuestionList, buildParams, buildTabs]) {
+    try { step(); } catch (error) { console.error(step.name, error); }
+  }
+  if (!CONFIG.eval_questions) {
+    $("#run-eval").disabled = true;
+    $("#eval-status").textContent = "No eval.jsonl loaded (start the server with --eval).";
+  }
+}
+
+$("#form").addEventListener("submit", (event) => {
+  event.preventDefault();
+  const question = $("#question").value.trim();
+  if (question) ask(question);
+});
+$("#qfilter").addEventListener("input", filterQuestions);
+$("#run-eval").addEventListener("click", runEvaluation);
+$("#download").addEventListener("click", downloadResults);
+$("#clear-runs").addEventListener("click", () => { runs = []; renderRuns(); });
+$("#article-close").addEventListener("click", () => $("#article-dialog").close());
+
+init();
+</script>
+</body>
+</html>
