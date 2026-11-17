@@ -20,9 +20,7 @@ DEFAULTS = {
 }
 MAX_SENTENCES = 3        # at most 3 sentences per article
 MIN_PART_KEYWORDS = 2    # a sub-question needs at least 2 keywords
-# If the best article passes tau, also keep the reranker's first choice even when
-# its own embedding score is below tau (fixes "right article found but filtered").
-# Set to False to get the previous behaviour.
+
 RESCUE_BEST = True
 
 
@@ -32,7 +30,7 @@ class Answer:
     sources: list
     answered: bool
     note: str = ""
-    evidence: list = field(default_factory=list)  # [{"article_id", "text"}]
+    evidence: list = field(default_factory=list)  
 
 
 @dataclass
